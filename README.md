@@ -1,2 +1,4 @@
-# alpha-zero
-Minimal PyTorch implementation of Alpha Zero for board games.
+# Alpha Zero
+
+A chess agent that follows from the Alpha Go Zero paper but is a lot simpler.
+
