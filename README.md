@@ -19,3 +19,6 @@ In this repo, we test the agent on two chess environments: tic-tac-toe and goban
 
 
 ## Results
+
+
+## Download the chess agent
