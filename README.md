@@ -1,4 +1,4 @@
-# Alpha Zero
+# Alpha Zero 从零学习下棋
 
 **Author:** Zhihan Yang @ Carleton College
 
