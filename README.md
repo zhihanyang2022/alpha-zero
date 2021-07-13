@@ -2,7 +2,7 @@
 
 **Author:** Zhihan Yang @ Carleton College
 
-**Keywords:** deep reinforcement learning, alpha go zero, policy iteration, rollout algorithms, PyTorch
+**Keywords:** deep reinforcement learning, alpha go zero, policy iteration, rollout algorithms, self-play, PyTorch
 
 A chess agent that follows from the Alpha Go Zero paper but is a slightly simpler. 
 
