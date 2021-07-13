@@ -7,3 +7,6 @@ By "simpler", I mean that this agent does not use MCTS and instead uses Monte Ca
 In this repo, we test the agent on two chess environments: tic-tac-toe and gobang.
 
 ## Algorithm
+
+
+## Results
