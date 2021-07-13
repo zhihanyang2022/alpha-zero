@@ -1,5 +1,9 @@
 # Alpha Zero
 
+**Author:** Zhihan Yang @ Carleton College
+
+**Keywords:** deep reinforcement learning, alpha go zero, policy iteration, rollout algorithms, PyTorch
+
 A chess agent that follows from the Alpha Go Zero paper but is a slightly simpler. 
 
 By "simpler", I mean that the only difference is that this agent does not use MCTS and instead uses Monte Carlo rollouts which are (1) easier to implement and (2) cleaner conceptually.
