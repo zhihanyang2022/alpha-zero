@@ -1,12 +1,13 @@
 from ast import literal_eval
 import time
 
-from games.tic_tac_toe import TicTacToe
+# from games.tic_tac_toe import TicTacToe
+from games.connect4 import Connect4
 from algo_components.node import Node
 from algo_components.mcts import mcts_one_iter
 
 
-game = TicTacToe()
+game = Connect4()
 
 while True:
 
@@ -17,10 +18,12 @@ while True:
         root = Node(parent=None, prior_prob=1.0)
 
         start = time.perf_counter()
-        for _ in range(2000):
+
+        for _ in range(5000):
             mcts_one_iter(game, root)
         end = time.perf_counter()
-        print(end - start)
+
+        print('Decision time:', end - start)
 
         move = root.get_move()
 

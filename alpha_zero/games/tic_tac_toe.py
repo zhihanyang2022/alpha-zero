@@ -18,6 +18,9 @@ class TicTacToe(Game):
         self.players = [-1, 1]
         self.current_player = -1  # np.random.choice(self.players)
 
+    def get_first_person_view(self) -> np.array:
+        return self.board * self.current_player
+
     def get_current_player(self):
         return self.current_player
 

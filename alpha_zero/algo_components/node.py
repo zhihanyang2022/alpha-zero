@@ -22,7 +22,7 @@ class Node:
         # flags for sanity check
         self.expanded = False
 
-        self.c_puct = 5
+        self.c_puct = 3
 
     def is_leaf(self):
         return len(self.children) == 0
@@ -57,6 +57,7 @@ class Node:
         best_move_so_far = None
         best_cnt_so_far = -np.inf
         for move, node in self.children.items():
+            # print(move, node.get_value(), node.value_sum / node.visit_cnt, node.visit_cnt)
             if node.visit_cnt > best_cnt_so_far:
                 best_move_so_far = move
                 best_cnt_so_far = node.visit_cnt

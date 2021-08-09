@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import numpy as np
 
 
 class Game(ABC):
@@ -13,4 +14,8 @@ class Game(ABC):
 
     @abstractmethod
     def get_valid_moves(self) -> list:
+        pass
+
+    @abstractmethod
+    def get_first_person_view(self) -> np.array:
         pass
