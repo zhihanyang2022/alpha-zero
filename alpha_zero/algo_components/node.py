@@ -1,4 +1,11 @@
 import numpy as np
+import random
+
+
+def softmax(x):
+    probs = np.exp(x - np.max(x))
+    probs /= np.sum(probs)
+    return probs
 
 
 class Node:
@@ -22,7 +29,7 @@ class Node:
         # flags for sanity check
         self.expanded = False
 
-        self.c_puct = 3
+        self.c_puct = 5
 
     def is_leaf(self):
         return len(self.children) == 0
@@ -52,13 +59,26 @@ class Node:
         ucb = self.c_puct * self.prior_prob * np.sqrt(self.parent.visit_cnt) / (1 + self.visit_cnt)
         return value + ucb
 
-    def get_move(self):
+    def get_move(self, temp):  # for evaluation
         assert self.is_root()
-        best_move_so_far = None
-        best_cnt_so_far = -np.inf
-        for move, node in self.children.items():
-            # print(move, node.get_value(), node.value_sum / node.visit_cnt, node.visit_cnt)
-            if node.visit_cnt > best_cnt_so_far:
-                best_move_so_far = move
-                best_cnt_so_far = node.visit_cnt
-        return best_move_so_far
+        moves, visit_cnts = [], []
+        for move, child in self.children.items():
+            moves.append(move)
+            visit_cnts.append(child.visit_cnt)
+        probs = softmax(1.0 / temp * np.log(np.array(visit_cnts) + 1e-10))
+        assert np.allclose(np.sum(probs), 1)
+        return random.choices(moves, weights=probs, k=1)[0]
+
+    def get_move_and_pi_vec(self, board_width, board_height, temp):  # for self-play (need pi_vec for later nn training)
+        assert self.is_root()
+        moves, visit_cnts = [], []
+        for move, child in self.children.items():
+            moves.append(move)
+            visit_cnts.append(child.visit_cnt)
+            probs = softmax(1.0 / temp * np.log(np.array(visit_cnts) + 1e-10))
+        assert np.allclose(np.sum(probs), 1)
+        pi_vec = np.zeros((board_width * board_height,))
+        for move, prob in zip(moves, probs):
+            index = move[0] * board_width + move[1]
+            pi_vec[index] = probs
+        return random.choices(moves, weights=probs, k=1)[0], pi_vec

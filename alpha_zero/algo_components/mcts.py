@@ -47,7 +47,7 @@ def mcts_one_iter(game: Game, root: Node, policy_fn=random_policy, policy_value_
             move, node = node.select()  # move is the edge
             done, winner = game.evolve(move)
 
-    if node.is_leaf() or not done:  # when node.is_leaf, obviously can't be done yet; "not done" is not even checked
+    if node.is_root() or not done:  # when node.is_root, obviously can't be done yet; "not done" is not even checked
         if policy_fn is not None:
             node.expand(guide=policy_fn(game.get_first_person_view(), game.get_valid_moves()))
             leaf_value = rollout(game, policy_fn)
@@ -62,4 +62,5 @@ def mcts_one_iter(game: Game, root: Node, policy_fn=random_policy, policy_value_
         else:
             leaf_value = 1 if winner == game.get_current_player() else -1
 
-    node.backup(-leaf_value)  # although it's current player's round, the action led to this node was taken by opponent
+    node.backup(-leaf_value)  # although it's current player's round,
+    # the action led to this node was taken by opponent

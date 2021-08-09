@@ -18,18 +18,18 @@ while True:
         root = Node(parent=None, prior_prob=1.0)
 
         start = time.perf_counter()
-
-        for _ in range(5000):
+        for _ in range(10000):
             mcts_one_iter(game, root)
         end = time.perf_counter()
 
         print('Decision time:', end - start)
 
-        move = root.get_move()
+        move = root.get_move(temp=1e-10)
 
     else:
 
         move = literal_eval(input("What's your move: "))
+        move = (move[0] - 1, move[1] - 1)
 
     done, winner = game.evolve(move)
     if done:
