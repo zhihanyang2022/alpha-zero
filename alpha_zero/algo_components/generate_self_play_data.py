@@ -25,7 +25,7 @@ def generate_self_play_data(
             mcts_one_iter(game, root,
                           policy_fn=None, policy_value_fn=policy_value_fn)
 
-        move, pi_vec = root.get_move_and_pi_vec(game.board.shape[0], game.board.shape[1], temp=1)  # for nn
+        move, pi_vec = root.get_move_and_pi_vec(game.board.shape[0], game.board.shape[1], temp=1)
 
         states.append(state)  # for nn
         pi_vecs.append(pi_vec)  # for nn
