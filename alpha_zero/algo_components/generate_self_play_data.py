@@ -46,4 +46,9 @@ def generate_self_play_data(
             z *= -1
         zs = list(reversed(zs))  # reverse to correct temporal order
 
+    states, pi_vecs, zs = map(np.array, [states, pi_vecs, zs])
+
+    # states will have shape (game_duration, board_width, board_height)
+    # pi_vecs and zs will have shape (game_duration, board_width * board_height)
+
     return states, pi_vecs, zs
