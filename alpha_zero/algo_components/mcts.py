@@ -3,7 +3,7 @@ import random
 from typing import Callable
 
 from games import Game
-from algo_components import Node
+from algo_components.node import Node
 
 
 def random_policy(first_person_view, valid_moves) -> dict:

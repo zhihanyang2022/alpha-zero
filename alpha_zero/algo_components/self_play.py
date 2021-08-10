@@ -1,6 +1,8 @@
 from typing import Callable, Tuple
 import numpy as np
-from algo_components import Node, mcts_one_iter
+
+from algo_components.node import Node
+from algo_components.mcts import mcts_one_iter
 
 
 def generate_self_play_data(

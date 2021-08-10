@@ -82,5 +82,5 @@ class Node:
         pi_vec = np.zeros((board_width * board_height,))
         for move, prob in zip(moves, probs):
             index = move[0] * board_width + move[1]
-            pi_vec[index] = probs
+            pi_vec[index] = prob
         return random.choices(moves, weights=probs, k=1)[0], pi_vec

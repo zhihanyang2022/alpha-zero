@@ -19,7 +19,7 @@ num_mcts_iter_pure_mcts = 500
 # @@@@@@@@@@ important objects @@@@@@@@@@
 
 board_width, board_height = game_klass().board.shape
-policy_value_net = PolicyValueNet(board_width, board_height).to(get_device())
+policy_value_net = PolicyValueNet(board_width, board_height).float().to(get_device())
 optimizer = optim.Adam(policy_value_net.parameters(), lr=1e-3, weight_decay=1e-4)  # l2 norm
 buffer = Buffer(board_width, board_height, buffer_size, batch_size)
 
@@ -27,12 +27,18 @@ buffer = Buffer(board_width, board_height, buffer_size, batch_size)
 
 for game_idx in range(num_games_for_training):
 
+    print(f'@@@@@ Iteration {game_idx+1} @@@@@')
+
     states, mcts_probs, zs = generate_self_play_data(
         game_klass=game_klass,
         num_mcts_iter=num_mcts_iter_alphazero,
         policy_value_fn=policy_value_net.policy_value_fn
     )
     buffer.push(states, mcts_probs, zs)
+
+    print('finished self-play')
+
+    print(buffer.cnt)
 
     if buffer.is_ready():
         for n in range(num_grad_steps):
@@ -48,7 +54,9 @@ for game_idx in range(num_games_for_training):
             loss.backward()
             optimizer.step()
 
-    if (game_idx + 1) % eval_freq:
+    print('finished training nn')
+
+    if (game_idx + 1) % eval_freq == 0:
 
         first_hand_scores = []
         for i in range(5):

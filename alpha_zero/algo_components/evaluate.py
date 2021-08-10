@@ -1,4 +1,5 @@
-from algo_components import Node, mcts_one_iter
+from algo_components.node import Node
+from algo_components.mcts import mcts_one_iter
 
 
 def play_one_game_against_pure_mcts(
