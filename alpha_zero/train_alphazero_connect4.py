@@ -10,9 +10,9 @@ from algo_components import PolicyValueNet, Buffer, generate_self_play_data, pla
 game_klass = Connect4
 num_games_for_training = 2000
 num_grad_steps = 5
-eval_freq = 50
+eval_freq = 1
 buffer_size = 10000
-batch_size = 512
+batch_size = 5
 num_mcts_iter_alphazero = 500
 num_mcts_iter_pure_mcts = 500
 
