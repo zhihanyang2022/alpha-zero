@@ -11,6 +11,7 @@ game_klass = Connect4
 num_games_for_training = 2000
 num_grad_steps = 5
 eval_freq = 1
+eval_num_games = 1
 buffer_size = 10000
 batch_size = 5
 num_mcts_iter_alphazero = 500
@@ -43,6 +44,8 @@ for game_idx in range(num_games_for_training):
     if buffer.is_ready():
         for n in range(num_grad_steps):
 
+            print('inside training loop')
+
             states_b, mcts_probs_b, zs_b = buffer.sample()
             predicted_probs, predicted_zs = policy_value_net(states_b)
 
@@ -59,7 +62,7 @@ for game_idx in range(num_games_for_training):
     if (game_idx + 1) % eval_freq == 0:
 
         first_hand_scores = []
-        for i in range(1):
+        for i in range(eval_num_games):
             score = play_one_game_against_pure_mcts(
                 game_klass=game_klass,
                 num_mcts_iters_pure=num_mcts_iter_pure_mcts,
@@ -70,7 +73,7 @@ for game_idx in range(num_games_for_training):
             first_hand_scores.append(score)
 
         second_hand_scores = []
-        for i in range(1):
+        for i in range(eval_num_games):
             score = play_one_game_against_pure_mcts(
                 game_klass=game_klass,
                 num_mcts_iters_pure=num_mcts_iter_pure_mcts,
@@ -86,7 +89,7 @@ for game_idx in range(num_games_for_training):
         if mean_first_hand_score > 0.99 and num_mcts_iter_pure_mcts < 5000:  # basically perfect
             num_mcts_iter_pure_mcts += 500
 
-        print(f"@@@@@ Eval after {game_idx}/{num_games_for_training} "
+        print(f"@@@@@ Eval after {game_idx + 1}/{num_games_for_training} "
               f"games against pure-mcts {num_mcts_iter_pure_mcts} @@@@@")
         print(f"First-hand score: {round(mean_first_hand_score, 2)}")
         print(f"Second-hand score: {round(mean_second_hand_score, 2)}")
