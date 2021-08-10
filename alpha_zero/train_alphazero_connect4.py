@@ -1,14 +1,18 @@
-import sys
-
 import numpy as np
 import torch
 import torch.optim as optim
+import wandb
 
 from games import Connect4
 from algo_components import PolicyValueNet, Buffer, generate_self_play_data, play_one_game_against_pure_mcts, get_device
 
 
-sys.stdout = open('output.txt','wt')
+wandb.init(
+    project="alphazero",
+    entity="yangz2",
+    settings=wandb.Settings(_disable_stats=True),
+    name=f'test'
+)
 
 # @@@@@@@@@@ hyper-parameters @@@@@@@@@@
 
