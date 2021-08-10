@@ -74,7 +74,7 @@ for game_idx in range(num_games_for_training):
         mean_first_hand_score = float(np.mean(first_hand_scores))
         mean_second_hand_score = float(np.mean(second_hand_scores))
 
-        if mean_first_hand_score > 0.99:  # basically perfect
+        if mean_first_hand_score > 0.99 and num_mcts_iter_pure_mcts < 5000:  # basically perfect
             num_mcts_iter_pure_mcts += 500
 
         print(f"@@@@@ Eval after {game_idx}/{num_games_for_training} "
