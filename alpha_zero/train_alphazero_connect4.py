@@ -59,7 +59,7 @@ for game_idx in range(num_games_for_training):
     if (game_idx + 1) % eval_freq == 0:
 
         first_hand_scores = []
-        for i in range(5):
+        for i in range(1):
             score = play_one_game_against_pure_mcts(
                 game_klass=game_klass,
                 num_mcts_iters_pure=num_mcts_iter_pure_mcts,
@@ -70,7 +70,7 @@ for game_idx in range(num_games_for_training):
             first_hand_scores.append(score)
 
         second_hand_scores = []
-        for i in range(5):
+        for i in range(1):
             score = play_one_game_against_pure_mcts(
                 game_klass=game_klass,
                 num_mcts_iters_pure=num_mcts_iter_pure_mcts,
