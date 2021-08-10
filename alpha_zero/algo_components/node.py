@@ -61,6 +61,7 @@ class Node:
 
     def get_move(self, temp):  # for evaluation
         assert self.is_root()
+        assert 0 < temp <= 1
         moves, visit_cnts = [], []
         for move, child in self.children.items():
             moves.append(move)
@@ -71,6 +72,7 @@ class Node:
 
     def get_move_and_pi_vec(self, board_width, board_height, temp):  # for self-play (need pi_vec for later nn training)
         assert self.is_root()
+        assert 0 < temp <= 1
         moves, visit_cnts = [], []
         for move, child in self.children.items():
             moves.append(move)

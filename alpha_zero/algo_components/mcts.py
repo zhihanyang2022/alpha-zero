@@ -2,8 +2,8 @@ from copy import deepcopy
 import random
 from typing import Callable
 
-from games.abstract_game import Game
-from algo_components.node import Node
+from games import Game
+from algo_components import Node
 
 
 def random_policy(first_person_view, valid_moves) -> dict:

@@ -4,10 +4,10 @@ import torch.nn.functional as F
 import numpy as np
 
 
-class Net(nn.Module):
+class PolicyValueNet(nn.Module):
     """policy-value network module"""
     def __init__(self, board_width, board_height):
-        super(Net, self).__init__()
+        super().__init__()
 
         self.board_width = board_width
         self.board_height = board_height

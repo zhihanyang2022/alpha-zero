@@ -1,7 +1,6 @@
 from typing import Callable, Tuple
 import numpy as np
-from algo_components.node import Node
-from algo_components.mcts import mcts_one_iter
+from algo_components import Node, mcts_one_iter
 
 
 def generate_self_play_data(
@@ -10,7 +9,7 @@ def generate_self_play_data(
         policy_value_fn: Callable
 ) -> Tuple[np.array, np.array, np.array]:
 
-    """Generate self-play data using guided MCTS"""
+    """Let guided MCTS play against itself"""
 
     game = game_klass()
 
