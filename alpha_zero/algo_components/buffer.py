@@ -30,7 +30,7 @@ class Buffer:
             self.cnt = min(self.cnt + 1, self.buffer_size)
 
     def is_ready(self):
-        return self.batch_size >= self.cnt
+        return self.batch_size <= self.cnt
 
     def sample(self):
         indices = np.random.randint(self.cnt, size=self.batch_size)
