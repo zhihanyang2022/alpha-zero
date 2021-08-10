@@ -1,6 +1,8 @@
 import numpy as np
 import torch
 
+from algo_components import get_device
+
 
 class Buffer:
 
@@ -32,8 +34,7 @@ class Buffer:
 
     def sample(self):
         indices = np.random.randint(self.cnt, size=self.batch_size)
-        states = torch.tensor(self.states[indices]).view(self.batch_size, 1, self.board_width, self.board_height)
-        pi_vecs = torch.tensor(self.pi_vecs[indices]).view(self.batch_size, self.board_width * self.board_height)
-        zs = torch.tensor(self.zs[indices]).view(self.batch_size, self.board_width * self.board_height)
-
+        states = torch.tensor(self.states[indices]).view(self.batch_size, 1, self.board_width, self.board_height).to(get_device())
+        pi_vecs = torch.tensor(self.pi_vecs[indices]).view(self.batch_size, self.board_width * self.board_height).to(get_device())
+        zs = torch.tensor(self.zs[indices]).view(self.batch_size, self.board_width * self.board_height).to(get_device())
         return states, pi_vecs, zs

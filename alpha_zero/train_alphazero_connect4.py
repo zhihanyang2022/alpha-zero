@@ -3,7 +3,7 @@ import torch
 import torch.optim as optim
 
 from games import Connect4
-from algo_components import PolicyValueNet, Buffer, generate_self_play_data, play_one_game_against_pure_mcts
+from algo_components import PolicyValueNet, Buffer, generate_self_play_data, play_one_game_against_pure_mcts, get_device
 
 # @@@@@@@@@@ hyper-parameters @@@@@@@@@@
 
@@ -19,7 +19,7 @@ num_mcts_iter_pure_mcts = 500
 # @@@@@@@@@@ important objects @@@@@@@@@@
 
 board_width, board_height = game_klass().board.shape
-policy_value_net = PolicyValueNet(board_width, board_height)
+policy_value_net = PolicyValueNet(board_width, board_height).to(get_device())
 optimizer = optim.Adam(policy_value_net.parameters(), lr=1e-3, weight_decay=1e-4)  # l2 norm
 buffer = Buffer(board_width, board_height, buffer_size, batch_size)
 
@@ -36,6 +36,7 @@ for game_idx in range(num_games_for_training):
 
     if buffer.is_ready():
         for n in range(num_grad_steps):
+
             states_b, mcts_probs_b, zs_b = buffer.sample()
             predicted_probs, predicted_zs = policy_value_net(states_b)
 

@@ -3,6 +3,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 
+from algo_components import get_device
+
 
 class PolicyValueNet(nn.Module):
     """policy-value network module"""
@@ -42,7 +44,7 @@ class PolicyValueNet(nn.Module):
 
     def policy_value_fn(self, first_person_view: np.array, valid_moves: list) -> tuple:
 
-        fpv_torch = torch.from_numpy(first_person_view).unsqueeze(0)
+        fpv_torch = torch.from_numpy(first_person_view).unsqueeze(0).to(get_device())
         assert fpv_torch.shape == (1, self.board_height, self.board_width)
 
         with torch.no_grad():
