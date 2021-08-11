@@ -49,11 +49,11 @@ def mcts_one_iter(game: Game, root: Node, policy_fn=random_policy, policy_value_
 
     if node.is_root() or not done:  # when node.is_root, obviously can't be done yet; "not done" is not even checked
         if policy_fn is not None:
-            node.expand(guide=policy_fn(game.get_first_person_view(), game.get_valid_moves()))
+            node.expand(guide=policy_fn(game.board * game.get_previous_player(), game.get_valid_moves()))
             neg_leaf_value = rollout(game, policy_fn)
             node.backup(-neg_leaf_value)
         else:
-            guide, leaf_value = policy_value_fn(game.get_first_person_view(), game.get_valid_moves())
+            guide, leaf_value = policy_value_fn(game.board * game.get_previous_player(), game.get_valid_moves())
             node.expand(guide=guide)
             node.backup(leaf_value)
     else:
