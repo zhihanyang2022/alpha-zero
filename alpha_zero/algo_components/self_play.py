@@ -23,8 +23,7 @@ def generate_self_play_data(
 
         root = Node(parent=None, prior_prob=1.0)
         for _ in range(num_mcts_iter):
-            mcts_one_iter(game, root,
-                          policy_fn=None, policy_value_fn=policy_value_fn)
+            mcts_one_iter(game, root, policy_value_fn=policy_value_fn)
 
         move, pi_vec = root.get_move_and_pi_vec(game.board.shape[0], game.board.shape[1], temp=1)
 
