@@ -19,10 +19,10 @@ wandb.init(
 game_klass = Connect4
 num_games_for_training = 2000
 num_grad_steps = 5
-eval_freq = 50
-eval_num_games = 5
+eval_freq = 10
+eval_num_games = 4
 buffer_size = 10000
-batch_size = 512
+batch_size = 64
 num_mcts_iter_alphazero = 500
 num_mcts_iter_pure_mcts = 500
 

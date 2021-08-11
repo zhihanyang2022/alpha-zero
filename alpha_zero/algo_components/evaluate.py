@@ -37,8 +37,7 @@ def play_one_game_against_pure_mcts(
             root = Node(parent=None, prior_prob=1.0)
 
             for _ in range(num_mcts_iters_alphazero):
-                mcts_one_iter(game, root,
-                              policy_fn=None, policy_value_fn=policy_value_fn)
+                mcts_one_iter(game, root, policy_value_fn=policy_value_fn)
 
             move = root.get_move(temp=1e-10)
 
