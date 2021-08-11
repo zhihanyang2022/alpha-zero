@@ -97,4 +97,5 @@ for game_idx in range(num_games_for_training):
         print(f"Score: {round(mean_score, 2)}")
 
         if mean_score >= 0 and num_mcts_iter_pure_mcts < 5000:
+            torch.save(policy_value_net.state_dict(), f"{wandb.run.dir}/pvnet_{num_mcts_iter_pure_mcts}.pth")
             num_mcts_iter_pure_mcts += 500
