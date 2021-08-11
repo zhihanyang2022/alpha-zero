@@ -9,7 +9,8 @@ def generate_self_play_data(
         game_klass: Callable,
         num_mcts_iter: int,
         policy_value_fn: Callable = None,
-        has_audience: bool = False
+        has_audience: bool = False,
+        high_temp_for_first_n: int = 3
 ) -> Tuple[np.array, np.array, np.array]:
 
     """Let guided MCTS play against itself"""
@@ -17,6 +18,8 @@ def generate_self_play_data(
     game = game_klass()
 
     states, pi_vecs = [], []
+
+    num_actions_take = 0
 
     while True:
 
@@ -28,12 +31,17 @@ def generate_self_play_data(
         for _ in range(num_mcts_iter):
             mcts_one_iter(game, root, policy_value_fn=policy_value_fn)
 
-        move, pi_vec = root.get_move_and_pi_vec(game.board.shape[0], game.board.shape[1], temp=1e-2)
+        if num_actions_take < high_temp_for_first_n:
+            temp = 1
+        else:
+            temp = 1e-10
+        move, pi_vec = root.get_move_and_pi_vec(game.board.shape[0], game.board.shape[1], temp=temp)
 
         states.append(state)  # for nn
         pi_vecs.append(pi_vec)  # for nn
 
         done, winner = game.evolve(move)
+        num_actions_take += 1
         if done:
             if has_audience:
                 print(game)
