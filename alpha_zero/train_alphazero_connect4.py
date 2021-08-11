@@ -18,11 +18,11 @@ wandb.init(
 
 game_klass = Connect4
 num_games_for_training = 2000
-num_grad_steps = 5
-eval_freq = 10
-eval_num_games = 4
+num_grad_steps = 50  # try to learn more than just 5 steps
+eval_freq = 100
+eval_num_games = 10  # 10 first-hand games, 10 second-hand games
 buffer_size = 10000
-batch_size = 64
+batch_size = 512
 num_mcts_iter_alphazero = 500
 num_mcts_iter_pure_mcts = 500
 
@@ -35,9 +35,9 @@ buffer = Buffer(board_width, board_height, buffer_size, batch_size)
 
 # @@@@@@@@@@ training loop @@@@@@@@@@
 
-for game_idx in range(num_games_for_training):
+print('Training began ...')
 
-    print(f'@@@@@ Iteration {game_idx+1} @@@@@')
+for game_idx in range(num_games_for_training):
 
     states, mcts_probs, zs = generate_self_play_data(
         game_klass=game_klass,
@@ -46,14 +46,9 @@ for game_idx in range(num_games_for_training):
     )
     buffer.push(states, mcts_probs, zs)
 
-    print('finished self-play')
-
-    print(buffer.cnt)
-
     if buffer.is_ready():
-        for n in range(num_grad_steps):
 
-            print('inside training loop')
+        for n in range(num_grad_steps):
 
             states_b, mcts_probs_b, zs_b = buffer.sample()
             predicted_log_probs, predicted_zs = policy_value_net(states_b)
@@ -66,7 +61,7 @@ for game_idx in range(num_games_for_training):
             loss.backward()
             optimizer.step()
 
-    print('finished training nn')
+        print('finished training nn')
 
     if (game_idx + 1) % eval_freq == 0:
 
@@ -95,10 +90,11 @@ for game_idx in range(num_games_for_training):
         mean_first_hand_score = float(np.mean(first_hand_scores))
         mean_second_hand_score = float(np.mean(second_hand_scores))
 
-        if mean_first_hand_score > 0.99 and num_mcts_iter_pure_mcts < 5000:  # basically perfect
-            num_mcts_iter_pure_mcts += 500
+        mean_score = (mean_first_hand_score + mean_second_hand_score) / 2
 
         print(f"@@@@@ Eval after {game_idx + 1}/{num_games_for_training} "
               f"games against pure-mcts {num_mcts_iter_pure_mcts} @@@@@")
-        print(f"First-hand score: {round(mean_first_hand_score, 2)}")
-        print(f"Second-hand score: {round(mean_second_hand_score, 2)}")
+        print(f"Score: {round(mean_score, 2)}")
+
+        if mean_score >= 0 and num_mcts_iter_pure_mcts < 5000:
+            num_mcts_iter_pure_mcts += 500
