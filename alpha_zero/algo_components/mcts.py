@@ -6,7 +6,7 @@ from games import Game
 from algo_components.node import Node
 
 
-def random_policy(first_person_view, valid_moves) -> dict:
+def random_policy(valid_moves) -> dict:
     num_valid_moves = len(valid_moves)
     probs = [1 / num_valid_moves] * num_valid_moves
     return {
@@ -19,10 +19,10 @@ def sample(policy):
     return random.choices(policy["moves"], weights=policy["probs"])[0]
 
 
-def rollout(game: Game, rollout_policy: Callable):
+def rollout(game: Game):
     current_player = game.get_current_player()
     while True:
-        move = sample(rollout_policy(game.get_first_person_view(), game.get_valid_moves()))
+        move = sample(random_policy(game.get_valid_moves()))
         done, winner = game.evolve(move)
         if done:
             break
@@ -32,9 +32,7 @@ def rollout(game: Game, rollout_policy: Callable):
         return 1 if winner == current_player else -1
 
 
-def mcts_one_iter(game: Game, root: Node, policy_fn=random_policy, policy_value_fn=None):
-
-    assert policy_fn is None or policy_value_fn is None
+def mcts_one_iter(game: Game, root: Node, policy_value_fn=None):
 
     # each node represent a game state; each edge represents a move
 
@@ -48,9 +46,9 @@ def mcts_one_iter(game: Game, root: Node, policy_fn=random_policy, policy_value_
             done, winner = game.evolve(move)
 
     if node.is_root() or not done:  # when node.is_root, obviously can't be done yet; "not done" is not even checked
-        if policy_fn is not None:
-            node.expand(guide=policy_fn(game.board * game.get_previous_player(), game.get_valid_moves()))
-            neg_leaf_value = rollout(game, policy_fn)
+        if policy_value_fn is None:
+            node.expand(guide=random_policy(game.get_valid_moves()))
+            neg_leaf_value = rollout(game)
             node.backup(-neg_leaf_value)
         else:
             guide, leaf_value = policy_value_fn(game.board * game.get_previous_player(), game.get_valid_moves())
