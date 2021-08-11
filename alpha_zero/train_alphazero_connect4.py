@@ -56,10 +56,10 @@ for game_idx in range(num_games_for_training):
             print('inside training loop')
 
             states_b, mcts_probs_b, zs_b = buffer.sample()
-            predicted_probs, predicted_zs = policy_value_net(states_b)
+            predicted_log_probs, predicted_zs = policy_value_net(states_b)
 
             loss_part1 = torch.mean((zs_b - predicted_zs) ** 2)
-            loss_part2 = torch.mean(torch.sum(mcts_probs_b * torch.log(predicted_probs), dim=1))
+            loss_part2 = torch.mean(torch.sum(mcts_probs_b * predicted_log_probs, dim=1))
             loss = loss_part1 + loss_part2
 
             optimizer.zero_grad()

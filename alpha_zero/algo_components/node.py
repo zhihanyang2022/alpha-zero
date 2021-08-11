@@ -77,7 +77,7 @@ class Node:
         for move, child in self.children.items():
             moves.append(move)
             visit_cnts.append(child.visit_cnt)
-            probs = softmax(1.0 / temp * np.log(np.array(visit_cnts) + 1e-10))
+        probs = softmax(1.0 / temp * np.log(np.array(visit_cnts) + 1e-10))
         assert np.allclose(np.sum(probs), 1)
         pi_vec = np.zeros((board_width * board_height,))
         for move, prob in zip(moves, probs):

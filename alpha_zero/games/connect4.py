@@ -25,7 +25,7 @@ class Connect4(Game):
         super().__init__()
         self.board = np.zeros((6, 6))
         self.players = [-1, 1]
-        self.current_player = -1
+        self.current_player = 1
 
     def get_previous_player(self) -> int:
         return self.current_player * -1

@@ -40,7 +40,7 @@ def generate_self_play_data(
         zs = [0] * game_duration
     else:  # there exists a winner
         zs = []
-        player_of_final_move = game.get_current_player() * -1
+        player_of_final_move = game.get_previous_player()
         z = 1 if player_of_final_move == winner else -1
         for _ in range(game_duration):
             zs.append(z)
