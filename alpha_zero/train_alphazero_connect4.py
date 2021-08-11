@@ -46,8 +46,6 @@ for game_idx in range(num_games_for_training):
     )
     buffer.push(states, mcts_probs, zs)
 
-    print("Finished self-play")
-
     if buffer.is_ready():
 
         for n in range(num_grad_steps):
@@ -62,8 +60,6 @@ for game_idx in range(num_games_for_training):
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-
-        print('Finished training nn')
 
     if (game_idx + 1) % eval_freq == 0:
 
