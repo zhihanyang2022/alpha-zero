@@ -19,7 +19,7 @@ def generate_self_play_data(
 
     while True:
 
-        state = game.get_first_person_view()  # for nn
+        state = game.board * game.get_current_player()  # for nn
 
         root = Node(parent=None, prior_prob=1.0)
         for _ in range(num_mcts_iter):
