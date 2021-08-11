@@ -60,7 +60,7 @@ def mcts_one_iter(game: Game, root: Node, policy_fn=random_policy, policy_value_
         # no expansion
         # degenerate rollout
         if winner == 0:  # no winner
-            leaf_value = 0
+            neg_leaf_value = 0
         else:
             neg_leaf_value = 1 if winner == game.get_current_player() else -1
         node.backup(-neg_leaf_value)
