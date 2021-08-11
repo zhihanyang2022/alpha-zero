@@ -18,7 +18,7 @@ while True:
         root = Node(parent=None, prior_prob=1.0)
 
         start = time.perf_counter()
-        for _ in range(5000):
+        for _ in range(10000):
             mcts_one_iter(game, root)
         end = time.perf_counter()
 
