@@ -20,7 +20,7 @@ game_klass = Connect4
 num_games_for_training = 1400
 num_grad_steps = 50  # try to learn more than just 5 steps
 eval_freq = 100  # 1400 / 100 = 14 evaluations
-eval_num_games = 6  # 10 first-hand games, 10 second-hand games
+eval_num_games = 5  # 10 first-hand games, 10 second-hand games
 buffer_size = 10000
 batch_size = 512
 num_mcts_iter_alphazero = 500
