@@ -17,7 +17,7 @@ def func(first_hand):
 
 if __name__ == '__main__':
 
-    num_games = 10
+    num_games = 20
 
     for first_hand in ["pure_mcts", "alphazero"]:
         with Pool(num_games) as p:
