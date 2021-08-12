@@ -1,5 +1,6 @@
 from ast import literal_eval
 import time
+import copy
 
 # from games.tic_tac_toe import TicTacToe
 from games.connect4 import Connect4
@@ -24,7 +25,7 @@ while True:
 
         print('Decision time:', end - start)
 
-        move = root.get_move(temp=1e-10)
+        move = root.get_move(temp=0)
 
     else:
 

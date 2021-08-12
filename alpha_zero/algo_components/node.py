@@ -61,22 +61,47 @@ class Node:
 
     def get_move(self, temp):  # for evaluation
         assert self.is_root()
-        moves, visit_cnts = [], []
-        for move, child in self.children.items():
-            moves.append(move)
-            visit_cnts.append(child.visit_cnt)
-        probs = softmax(1.0 / temp * np.log(np.array(visit_cnts) + 1e-10))
-        assert np.allclose(np.sum(probs), 1)
-        return random.choices(moves, weights=probs, k=1)[0]
+        assert 0 <= temp <= 1
+        if temp > 0:
+            moves, visit_cnts = [], []
+            for move, child in self.children.items():
+                moves.append(move)
+                visit_cnts.append(child.visit_cnt)
+            probs = softmax(1.0 / temp * np.log(np.array(visit_cnts) + 1e-10))
+            assert np.allclose(np.sum(probs), 1)
+            return random.choices(moves, weights=probs, k=1)[0]
+        else:
+            best_visit_cnt = -np.inf
+            best_move = None
+            for i, (move, child) in enumerate(self.children.items()):
+                if child.visit_cnt > best_visit_cnt:
+                    best_visit_cnt = child.visit_cnt
+                    best_move = move
+            return best_move
 
     def get_move_and_pi_vec(self, board_width, board_height, temp):  # for self-play (need pi_vec for later nn training)
         assert self.is_root()
-        moves, visit_cnts = [], []
-        for move, child in self.children.items():
-            moves.append(move)
-            visit_cnts.append(child.visit_cnt)
-        probs = softmax(1.0 / temp * np.log(np.array(visit_cnts) + 1e-10))
-        assert np.allclose(np.sum(probs), 1)
+        assert 0 <= temp <= 1
+        if temp > 0:
+            moves, visit_cnts = [], []
+            for move, child in self.children.items():
+                moves.append(move)
+                visit_cnts.append(child.visit_cnt)
+            probs = softmax(1.0 / temp * np.log(np.array(visit_cnts) + 1e-10))
+            assert np.allclose(np.sum(probs), 1)
+        else:
+            best_visit_cnt = -np.inf
+            best_move_idx = None
+            num_moves = 0
+            moves = []
+            for i, (move, child) in enumerate(self.children.items()):
+                if child.visit_cnt > best_visit_cnt:
+                    best_visit_cnt = child.visit_cnt
+                    best_move_idx = i
+                num_moves += 1
+                moves.append(move)
+            probs = np.zeros((num_moves, ))
+            probs[best_move_idx] = 1
         pi_vec = np.zeros((board_width * board_height,))
         for move, prob in zip(moves, probs):
             index = move[0] * board_width + move[1]

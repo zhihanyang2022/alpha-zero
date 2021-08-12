@@ -16,7 +16,10 @@ class TicTacToe(Game):
         super().__init__()
         self.board = np.zeros((3, 3))
         self.players = [-1, 1]
-        self.current_player = -1  # np.random.choice(self.players)
+        self.current_player = 1  # np.random.choice(self.players)
+
+    def get_previous_player(self) -> int:
+        return self.current_player * -1
 
     def get_current_player(self):
         return self.current_player

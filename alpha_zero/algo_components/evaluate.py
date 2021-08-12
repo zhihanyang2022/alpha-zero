@@ -7,7 +7,8 @@ def play_one_game_against_pure_mcts(
         num_mcts_iters_pure,
         num_mcts_iters_alphazero,
         policy_value_fn,
-        first_hand
+        first_hand,
+        has_audience=False
 ):
 
     game = game_klass()  # at the start, current player is always 1
@@ -23,6 +24,9 @@ def play_one_game_against_pure_mcts(
 
     while True:
 
+        if has_audience:
+            print(game)
+
         if game.get_current_player() == pure_mcts:
 
             root = Node(parent=None, prior_prob=1.0)
@@ -30,7 +34,7 @@ def play_one_game_against_pure_mcts(
             for _ in range(num_mcts_iters_pure):
                 mcts_one_iter(game, root)
 
-            move = root.get_move(temp=1e-10)
+            move = root.get_move(temp=0)
 
         else:
 
@@ -39,10 +43,12 @@ def play_one_game_against_pure_mcts(
             for _ in range(num_mcts_iters_alphazero):
                 mcts_one_iter(game, root, policy_value_fn=policy_value_fn)
 
-            move = root.get_move(temp=1e-10)
+            move = root.get_move(temp=0)
 
         done, winner = game.evolve(move)
         if done:
+            if has_audience:
+                print(game)
             break
 
     # return the outcome of the game from perspective of alphazero

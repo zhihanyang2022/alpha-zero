@@ -1,6 +1,5 @@
 from copy import deepcopy
 import random
-from typing import Callable
 
 from games import Game
 from algo_components.node import Node
