@@ -22,4 +22,4 @@ if __name__ == '__main__':
     for first_hand in ["pure_mcts", "alphazero"]:
         with Pool(num_games) as p:
             outcomes = p.map(func, [first_hand] * num_games)
-        print(first_hand, np.mean(outcomes))
+        print(first_hand, outcomes)
