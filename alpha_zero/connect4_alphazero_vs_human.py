@@ -23,7 +23,7 @@ while True:
         root = Node(parent=None, prior_prob=1.0)
 
         start = time.perf_counter()
-        for _ in range(500):
+        for _ in range(2000):
             mcts_one_iter(game, root, policy_value_fn=policy_value_net.policy_value_fn)
         end = time.perf_counter()
 

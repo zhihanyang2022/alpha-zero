@@ -10,7 +10,7 @@ def func(first_hand):
     policy_value_net.load_state_dict(torch.load("trained_models/pvnet_1200.pth", map_location=torch.device('cpu')))
     outcome = play_one_game_against_pure_mcts(
         Connect4,
-        num_mcts_iters_pure=5000,
+        num_mcts_iters_pure=500,
         num_mcts_iters_alphazero=500,
         policy_value_fn=policy_value_net.policy_value_fn,
         first_hand=first_hand,
