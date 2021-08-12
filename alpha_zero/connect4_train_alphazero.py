@@ -17,14 +17,14 @@ wandb.init(
 # @@@@@@@@@@ hyper-parameters @@@@@@@@@@
 
 game_klass = Connect4
-num_games_for_training = 2000
+num_games_for_training = 1400
 num_grad_steps = 50  # try to learn more than just 5 steps
-eval_freq = 50
-eval_num_games = 5  # 10 first-hand games, 10 second-hand games
+eval_freq = 200  # 1400 / 200 = 7 evaluations
+eval_num_games = 10  # 10 first-hand games, 10 second-hand games
 buffer_size = 10000
 batch_size = 512
 num_mcts_iter_alphazero = 500
-num_mcts_iter_pure_mcts = 500
+num_mcts_iter_pure_mcts = 1000
 
 # @@@@@@@@@@ important objects @@@@@@@@@@
 
@@ -92,8 +92,11 @@ for game_idx in range(num_games_for_training):
 
         print(f"@@@@@ Eval after {game_idx + 1}/{num_games_for_training} "
               f"games against pure-mcts {num_mcts_iter_pure_mcts} @@@@@")
-        print(f"Score: {round(mean_score, 2)}")
 
+        print(f"Score (first-hand): {round(mean_first_hand_score, 2)}")
+        print(f"Score (second-hand): {round(mean_second_hand_score, 2)}")
+        print(f"Score (overall): {round(mean_score, 2)}")
+
+        torch.save(policy_value_net.state_dict(), f"{wandb.run.dir}/pvnet_{game_idx+1}.pth")
         if mean_score >= 0 and num_mcts_iter_pure_mcts < 5000:
-            torch.save(policy_value_net.state_dict(), f"{wandb.run.dir}/pvnet_{num_mcts_iter_pure_mcts}.pth")
-            num_mcts_iter_pure_mcts += 500
+            num_mcts_iter_pure_mcts += 1000
