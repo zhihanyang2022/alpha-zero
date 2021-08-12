@@ -7,8 +7,8 @@ from multiprocessing import Pool
 def func(first_hand):
     outcome = play_one_game_against_pure_mcts(
         Connect4,
-        num_mcts_iters_pure=1000,
-        num_mcts_iters_alphazero=1000,
+        num_mcts_iters_pure=5000,
+        num_mcts_iters_alphazero=10000,
         policy_value_fn=None,
         first_hand=first_hand,
     )
