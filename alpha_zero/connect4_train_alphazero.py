@@ -17,7 +17,7 @@ wandb.init(
 # @@@@@@@@@@ hyper-parameters @@@@@@@@@@
 
 game_klass = Connect4
-num_games_for_training = 1400
+num_games_for_training = 1200
 num_grad_steps = 50  # try to learn more than just 5 steps
 eval_freq = 100  # 1400 / 100 = 14 evaluations
 eval_num_games = 5  # 10 first-hand games, 10 second-hand games
