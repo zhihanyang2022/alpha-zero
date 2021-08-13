@@ -104,9 +104,9 @@ class Node:
                     best_move_idx = i
                 num_moves += 1
                 moves.append(move)
-            probs = np.zeros((num_moves,))
+            probs = np.zeros((num_moves, ))
             probs[best_move_idx] = 1
-            probs = probs * 0.75 + np.random.dirichlet([alpha] * len(moves)) * 0.25
+            probs = probs * 0.75 + np.random.dirichlet([alpha] * num_moves) * 0.25
             assert np.allclose(np.sum(probs), 1)
 
         pi_vec = np.zeros((board_width * board_height,))
