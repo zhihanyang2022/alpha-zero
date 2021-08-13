@@ -35,6 +35,7 @@ def generate_self_play_data(
             move, pi_vec = root.get_move_and_pi_vec(game.board.shape[0], game.board.shape[1], temp=1, alpha=None)
         else:
             move, pi_vec = root.get_move_and_pi_vec(game.board.shape[0], game.board.shape[1], temp=0, alpha=0.3)
+            # https://stats.stackexchange.com/questions/322831/purpose-of-dirichlet-noise-in-the-alphazero-paper
 
         states.append(state)  # for nn
         pi_vecs.append(pi_vec)  # for nn
