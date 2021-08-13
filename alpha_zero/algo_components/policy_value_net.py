@@ -42,7 +42,7 @@ class PolicyValueNet(nn.Module):
         x_val = torch.tanh(self.val_fc2(x_val))
         return x_act, x_val
 
-    def policy_value_fn(self, first_person_view: np.array, valid_moves: list) -> tuple:
+    def policy_value_fn(self, first_person_view: np.array, valid_moves: list, return_pi_vec: bool = False) -> tuple:
 
         fpv_torch = torch.from_numpy(first_person_view).unsqueeze(0).unsqueeze(0).to(get_device())
         assert fpv_torch.shape == (1, 1, self.board_height, self.board_width)
@@ -57,4 +57,7 @@ class PolicyValueNet(nn.Module):
             index = move[0] * self.board_width + move[1]
             probs.append(p_vec[index])
 
-        return {"moves": valid_moves, "probs": probs}, float(x_val)
+        if return_pi_vec is False:  # normal use case
+            return {"moves": valid_moves, "probs": probs}, float(x_val)
+        else:  # for visualizataion
+            return p_vec, float(x_val)

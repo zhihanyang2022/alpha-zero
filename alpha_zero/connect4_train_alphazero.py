@@ -42,7 +42,8 @@ for game_idx in range(num_games_for_training):
     states, mcts_probs, zs = generate_self_play_data(
         game_klass=game_klass,
         num_mcts_iter=num_mcts_iter_alphazero,
-        policy_value_fn=policy_value_net.policy_value_fn
+        policy_value_fn=policy_value_net.policy_value_fn,
+        high_temp_for_first_n=3
     )
     buffer.push(states, mcts_probs, zs)
 

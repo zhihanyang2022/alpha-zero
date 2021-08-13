@@ -79,16 +79,20 @@ class Node:
                     best_move = move
             return best_move
 
-    def get_move_and_pi_vec(self, board_width, board_height, temp):  # for self-play (need pi_vec for later nn training)
+    def get_move_and_pi_vec(self, board_width, board_height, temp, alpha):  # for self-play (need pi_vec for later nn training)
+
         assert self.is_root()
         assert 0 <= temp <= 1
+        assert temp > 0 and alpha is None  # first-phase of self-play; exploration based on visit counts
+        assert temp == 0 and alpha is not None  # second-phase of self-play; exploration based on dirichlet noise
+
         if temp > 0:
             moves, visit_cnts = [], []
             for move, child in self.children.items():
                 moves.append(move)
                 visit_cnts.append(child.visit_cnt)
             probs = softmax(1.0 / temp * np.log(np.array(visit_cnts) + 1e-10))
-            assert np.allclose(np.sum(probs), 1)
+
         else:
             best_visit_cnt = -np.inf
             best_move_idx = None
@@ -100,10 +104,14 @@ class Node:
                     best_move_idx = i
                 num_moves += 1
                 moves.append(move)
-            probs = np.zeros((num_moves, ))
+            probs = np.zeros((num_moves,))
             probs[best_move_idx] = 1
+            probs = probs * 0.75 + np.random.dirichlet([alpha] * len(moves)) * 0.25
+            assert np.allclose(np.sum(probs), 1)
+
         pi_vec = np.zeros((board_width * board_height,))
         for move, prob in zip(moves, probs):
             index = move[0] * board_width + move[1]
             pi_vec[index] = prob
+
         return random.choices(moves, weights=probs, k=1)[0], pi_vec
