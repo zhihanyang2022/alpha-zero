@@ -34,7 +34,7 @@ def generate_self_play_data(
         if num_actions_take < high_temp_for_first_n:
             move, pi_vec = root.get_move_and_pi_vec(game.board.shape[0], game.board.shape[1], temp=1, alpha=None)
         else:
-            move, pi_vec = root.get_move_and_pi_vec(game.board.shape[0], game.board.shape[1], temp=0, alpha=0.03)
+            move, pi_vec = root.get_move_and_pi_vec(game.board.shape[0], game.board.shape[1], temp=0, alpha=0.3)
 
         states.append(state)  # for nn
         pi_vecs.append(pi_vec)  # for nn
