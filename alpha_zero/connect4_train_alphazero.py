@@ -2,6 +2,7 @@ import numpy as np
 import torch
 import torch.optim as optim
 import wandb
+from tqdm import tqdm
 
 from games import Connect4
 from algo_components import PolicyValueNet, Buffer, generate_self_play_data, play_one_game_against_pure_mcts, get_device
@@ -37,7 +38,7 @@ buffer = Buffer(board_width, board_height, buffer_size, batch_size)
 
 print('Training began ...')
 
-for game_idx in range(num_games_for_training):
+for game_idx in tqdm(range(num_games_for_training)):
 
     states, mcts_probs, zs = generate_self_play_data(
         game_klass=game_klass,
