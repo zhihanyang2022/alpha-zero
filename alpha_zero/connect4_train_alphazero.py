@@ -19,7 +19,7 @@ wandb.init(
 game_klass = Connect4
 num_games_for_training = 5000
 num_grad_steps = 50  # try to learn more than just 5 steps
-eval_freq = 500  # 3000 / 500 = 6 evaluations
+eval_freq = 500  # 5000 / 500 = 10 evaluations
 eval_num_games = 5  # 10 first-hand games, 10 second-hand games
 buffer_size = 30000
 batch_size = 512
