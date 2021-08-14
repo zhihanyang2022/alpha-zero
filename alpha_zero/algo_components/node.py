@@ -83,8 +83,7 @@ class Node:
 
         assert self.is_root()
         assert 0 <= temp <= 1
-        assert temp > 0 and alpha is None  # first-phase of self-play; exploration based on visit counts
-        assert temp == 0 and alpha is not None  # second-phase of self-play; exploration based on dirichlet noise
+        assert (temp > 0 and alpha is None) or (temp == 0 and alpha is not None)
 
         if temp > 0:
             moves, visit_cnts = [], []
