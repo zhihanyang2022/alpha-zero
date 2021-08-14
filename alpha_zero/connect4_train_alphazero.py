@@ -17,14 +17,14 @@ wandb.init(
 # @@@@@@@@@@ hyper-parameters @@@@@@@@@@
 
 game_klass = Connect4
-num_games_for_training = 5000
+num_games_for_training = 3000
 num_grad_steps = 50  # try to learn more than just 5 steps
-eval_freq = 500  # 5000 / 500 = 10 evaluations
+eval_freq = 1000  # 3000 / 1000 = 3 evaluations
 eval_num_games = 5  # 5 first-hand games, 5 second-hand games
-buffer_size = 30000
+buffer_size = 20000
 batch_size = 512
 num_mcts_iter_alphazero = 500
-num_mcts_iter_pure_mcts = 5000
+num_mcts_iter_pure_mcts = 500
 
 # @@@@@@@@@@ important objects @@@@@@@@@@
 
