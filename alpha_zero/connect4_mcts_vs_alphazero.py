@@ -11,6 +11,7 @@ def func(first_hand):
     outcome = play_one_game_against_pure_mcts(
         Connect4,
         num_mcts_iters_pure=10000,
+        num_mcts_iters_alphazero=500,
         policy_value_fn=policy_value_net.policy_value_fn,
         first_hand=first_hand,
     )

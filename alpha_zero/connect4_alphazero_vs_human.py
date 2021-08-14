@@ -1,9 +1,10 @@
 from ast import literal_eval
 import torch
-from numpy import unravel_index
+import numpy as np
 
 from games.connect4 import Connect4
 from algo_components.policy_value_net import PolicyValueNet
+from algo_components import Node, mcts_one_iter
 
 
 game = Connect4()
@@ -17,12 +18,15 @@ while True:
 
     if game.current_player == -1:
 
-        pi_vec, _ = policy_value_net.policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(), True)
-        pi_vec[pi_vec < 0.01] = 0
-        
-        pi_vec_square = pi_vec.reshape(game.board.shape)
+        # pi_vec, _ = policy_value_net.policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(),
+        # True)
 
-        move = unravel_index(pi_vec_square.argmax(), pi_vec_square.shape)
+        root = Node(parent=None, prior_prob=1.0)
+
+        for _ in range(np.random.randint(500, 1000)):  # introduce some stochasticity here
+            mcts_one_iter(game, root, policy_value_fn=policy_value_net.policy_value_fn)
+
+        move = root.get_move(temp=0)
 
     else:
 
