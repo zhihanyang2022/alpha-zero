@@ -57,7 +57,7 @@ class PolicyValueNet(nn.Module):
             index = move[0] * self.board_width + move[1]
             probs.append(p_vec[index])
 
-        if return_pi_vec is False:  # normal use case
+        if return_pi_vec is False:  # as guiding policy
             return {"moves": valid_moves, "probs": probs}, float(x_val)
-        else:  # for visualizataion
+        else:  # for evaluation
             return p_vec, float(x_val)
