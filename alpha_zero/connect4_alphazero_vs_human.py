@@ -18,12 +18,13 @@ while True:
 
     if game.current_player == -1:
 
-        # pi_vec, _ = policy_value_net.policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(),
-        # True)
+        pi_vec, _ = policy_value_net.policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(), True)
+        pi_vec[pi_vec < 0.01] = 0
+        print(pi_vec.reshape(game.board.shape))
 
         root = Node(parent=None, prior_prob=1.0)
 
-        for _ in range(np.random.randint(500, 1000)):  # introduce some stochasticity here
+        for _ in range(np.random.randint(300, 1000)):  # introduce some stochasticity here
             mcts_one_iter(game, root, policy_value_fn=policy_value_net.policy_value_fn)
 
         move = root.get_move(temp=0)

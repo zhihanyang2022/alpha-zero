@@ -1,6 +1,5 @@
 from algo_components import play_one_game_against_pure_mcts
 from games import Connect4
-from multiprocessing import Pool
 import torch
 from algo_components.policy_value_net import PolicyValueNet
 
@@ -14,15 +13,16 @@ def func(first_hand):
         num_mcts_iters_alphazero=500,
         policy_value_fn=policy_value_net.policy_value_fn,
         first_hand=first_hand,
+        has_audience=True
     )
     return outcome
 
 
 if __name__ == '__main__':
 
-    num_games = 20
-
-    for first_hand in ["pure_mcts", "alphazero"]:
-        with Pool(num_games) as p:
-            outcomes = p.map(func, [first_hand] * num_games)
+    for first_hand in ["alphazero"]:
+        outcomes = []
+        for i in range(20):
+            outcome = func(first_hand)
+            outcomes.append(outcome)
         print(first_hand, outcomes)

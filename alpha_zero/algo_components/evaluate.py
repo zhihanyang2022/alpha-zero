@@ -1,4 +1,5 @@
 from numpy import unravel_index
+import numpy as np
 
 from algo_components.node import Node
 from algo_components.mcts import mcts_one_iter
@@ -40,9 +41,15 @@ def play_one_game_against_pure_mcts(
 
         else:
 
+            if has_audience:
+                pi_vec, _ = policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(), True)
+                pi_vec[pi_vec < 0.01] = 0
+                print(pi_vec.reshape(game.board.shape))
+
             root = Node(parent=None, prior_prob=1.0)
 
-            for _ in range(num_mcts_iters_alphazero):
+            # introduce randomness by randomly adjusting num mcts iter
+            for _ in range(np.random.randint(num_mcts_iters_alphazero // 2, num_mcts_iters_alphazero * 2)):
                 mcts_one_iter(game, root, policy_value_fn=policy_value_fn)
 
             move = root.get_move(temp=0)
