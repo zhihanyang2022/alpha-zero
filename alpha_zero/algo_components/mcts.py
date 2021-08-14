@@ -48,11 +48,9 @@ def mcts_one_iter(game: Game, root: Node, policy_value_fn=None):
         if policy_value_fn is None:
             node.expand(guide=random_policy(game.get_valid_moves()))
             neg_leaf_value = rollout(game)
-            node.backup(-neg_leaf_value)
         else:
-            guide, leaf_value = policy_value_fn(game.board * game.get_previous_player(), game.get_valid_moves())
+            guide, neg_leaf_value = policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves())
             node.expand(guide=guide)
-            node.backup(leaf_value)
     else:
         # no expansion
         # degenerate rollout
@@ -60,4 +58,5 @@ def mcts_one_iter(game: Game, root: Node, policy_value_fn=None):
             neg_leaf_value = 0
         else:
             neg_leaf_value = 1 if winner == game.get_current_player() else -1
-        node.backup(-neg_leaf_value)
+
+    node.backup(-neg_leaf_value)
