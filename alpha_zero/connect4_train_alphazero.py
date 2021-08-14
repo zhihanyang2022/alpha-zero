@@ -1,3 +1,10 @@
+"""
+Name: connect4_train_alphazero.py
+Desc: Training script for AlphaZero on game Connect4.
+Author: Zhihan Yang
+Date: August 14, 2021
+"""
+
 import numpy as np
 import torch
 import torch.optim as optim
@@ -18,9 +25,9 @@ wandb.init(
 # @@@@@@@@@@ hyper-parameters @@@@@@@@@@
 
 game_klass = Connect4
-num_games_for_training = 3000
-num_grad_steps = 50  # try to learn more than just 5 steps
-eval_freq = 1000  # 3000 / 1000 = 3 evaluations
+num_games_for_training = 3000  # in total, 3000 self-play games will be played
+num_grad_steps = 50
+eval_freq = 1000  # evaluate alphazero once per 1000 self-play games
 eval_num_games = 5  # 5 first-hand games, 5 second-hand games
 buffer_size = 20000
 batch_size = 512
@@ -36,9 +43,9 @@ buffer = Buffer(board_width, board_height, buffer_size, batch_size)
 
 # @@@@@@@@@@ training loop @@@@@@@@@@
 
-print('Training began ...')
+for game_idx in tqdm(range(num_games_for_training)):  # for each self-play game ...
 
-for game_idx in tqdm(range(num_games_for_training)):
+    # self-play means to let the current alphazero play with itself (with exploration noise added)
 
     states, mcts_probs, zs = generate_self_play_data(
         game_klass=game_klass,
@@ -46,7 +53,14 @@ for game_idx in tqdm(range(num_games_for_training)):
         policy_value_fn=policy_value_net.policy_value_fn,
         high_temp_for_first_n=3
     )
+
+    # add the self-play data into a buffer; the buffer also augments the self-play data using geometries
+    # we do this because generating self-play data is a time-consuming process, especially when
+    # our MCTS is implemented in pure Python code
+
     buffer.push(states, mcts_probs, zs)
+
+    # update the policy-value network using supervised training
 
     if buffer.is_ready():
 
@@ -62,6 +76,10 @@ for game_idx in tqdm(range(num_games_for_training)):
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
+
+    # evaluate alphazero infrequently against a pure MCTS play
+    # this can be very time-consuming, so set eval_freq to a large value and num_mcts_iter_pure_mcts
+    # for a small value
 
     if (game_idx + 1) % eval_freq == 0:
 
