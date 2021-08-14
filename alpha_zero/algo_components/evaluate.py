@@ -1,3 +1,5 @@
+from numpy import unravel_index
+
 from algo_components.node import Node
 from algo_components.mcts import mcts_one_iter
 
@@ -5,7 +7,6 @@ from algo_components.mcts import mcts_one_iter
 def play_one_game_against_pure_mcts(
         game_klass,
         num_mcts_iters_pure,
-        num_mcts_iters_alphazero,
         policy_value_fn,
         first_hand,
         has_audience=False
@@ -38,12 +39,12 @@ def play_one_game_against_pure_mcts(
 
         else:
 
-            root = Node(parent=None, prior_prob=1.0)
+            pi_vec, _ = policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(), True)
+            pi_vec[pi_vec < 0.01] = 0
 
-            for _ in range(num_mcts_iters_alphazero):
-                mcts_one_iter(game, root, policy_value_fn=policy_value_fn)
+            pi_vec_square = pi_vec.reshape(game.board.shape)
 
-            move = root.get_move(temp=0)
+            move = unravel_index(pi_vec_square.argmax(), pi_vec_square.shape)
 
         done, winner = game.evolve(move)
         if done:

@@ -88,7 +88,6 @@ for game_idx in tqdm(range(num_games_for_training)):  # for each self-play game 
             score = play_one_game_against_pure_mcts(
                 game_klass=game_klass,
                 num_mcts_iters_pure=num_mcts_iter_pure_mcts,
-                num_mcts_iters_alphazero=num_mcts_iter_alphazero,
                 policy_value_fn=policy_value_net.policy_value_fn,
                 first_hand="alphazero"
             )
@@ -99,7 +98,6 @@ for game_idx in tqdm(range(num_games_for_training)):  # for each self-play game 
             score = play_one_game_against_pure_mcts(
                 game_klass=game_klass,
                 num_mcts_iters_pure=num_mcts_iter_pure_mcts,
-                num_mcts_iters_alphazero=num_mcts_iter_alphazero,
                 policy_value_fn=policy_value_net.policy_value_fn,
                 first_hand="pure_mcts"
             )
