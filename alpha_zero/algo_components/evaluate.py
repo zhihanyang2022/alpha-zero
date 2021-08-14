@@ -40,10 +40,7 @@ def play_one_game_against_pure_mcts(
         else:
 
             pi_vec, _ = policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(), True)
-            pi_vec[pi_vec < 0.01] = 0
-
             pi_vec_square = pi_vec.reshape(game.board.shape)
-
             move = unravel_index(pi_vec_square.argmax(), pi_vec_square.shape)
 
         done, winner = game.evolve(move)
