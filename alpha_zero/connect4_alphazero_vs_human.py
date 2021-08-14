@@ -1,12 +1,8 @@
 from ast import literal_eval
-import time
 import torch
 from numpy import unravel_index
 
-# from games.tic_tac_toe import TicTacToe
 from games.connect4 import Connect4
-from algo_components.node import Node
-from algo_components.mcts import mcts_one_iter
 from algo_components.policy_value_net import PolicyValueNet
 
 
@@ -19,7 +15,7 @@ print(game)
 
 while True:
 
-    if game.current_player == 1:
+    if game.current_player == -1:
 
         pi_vec, _ = policy_value_net.policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(), True)
         pi_vec[pi_vec < 0.01] = 0
@@ -35,9 +31,6 @@ while True:
 
     done, winner = game.evolve(move)
     print(game)
-
-    if game.get_previous_player() == 1:
-        print("Predicted score:", -policy_value_net.policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves())[1])
 
     if done:
         print(game)
