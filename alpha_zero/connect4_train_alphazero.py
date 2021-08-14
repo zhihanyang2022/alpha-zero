@@ -17,14 +17,14 @@ wandb.init(
 # @@@@@@@@@@ hyper-parameters @@@@@@@@@@
 
 game_klass = Connect4
-num_games_for_training = 1200
+num_games_for_training = 3000
 num_grad_steps = 50  # try to learn more than just 5 steps
-eval_freq = 100  # 1400 / 100 = 14 evaluations
-eval_num_games = 5  # 5 first-hand games, 5 second-hand games
-buffer_size = 10000
+eval_freq = 500  # 3000 / 500 = 6 evaluations
+eval_num_games = 5  # 10 first-hand games, 10 second-hand games
+buffer_size = 30000
 batch_size = 512
 num_mcts_iter_alphazero = 500
-num_mcts_iter_pure_mcts = 1000
+num_mcts_iter_pure_mcts = 5000
 
 # @@@@@@@@@@ important objects @@@@@@@@@@
 
@@ -99,5 +99,3 @@ for game_idx in range(num_games_for_training):
         print(f"Score (overall): {round(mean_score, 2)}")
 
         torch.save(policy_value_net.state_dict(), f"{wandb.run.dir}/pvnet_{game_idx+1}.pth")
-        if mean_score >= 0 and num_mcts_iter_pure_mcts < 5000:
-            num_mcts_iter_pure_mcts += 1000
