@@ -23,6 +23,6 @@ if __name__ == '__main__':
     for first_hand in ["alphazero"]:
         outcomes = []
         for i in range(20):
-            outcome = func(first_hand)
+            outcome = func(first_hand); print(outcome)
             outcomes.append(outcome)
         print(first_hand, outcomes)
