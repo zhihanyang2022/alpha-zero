@@ -20,7 +20,7 @@ def func(first_hand):
 
 if __name__ == '__main__':
 
-    for first_hand in ["alphazero"]:
+    for first_hand in ["alphazero", "pure_mcts"]:
         outcomes = []
         for i in range(20):
             outcome = func(first_hand); print(outcome)

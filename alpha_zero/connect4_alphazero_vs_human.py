@@ -10,7 +10,7 @@ from algo_components import Node, mcts_one_iter
 game = Connect4()
 
 policy_value_net = PolicyValueNet(*game.board.shape)
-policy_value_net.load_state_dict(torch.load("trained_models/pvnet_2000.pth", map_location=torch.device('cpu')))
+policy_value_net.load_state_dict(torch.load("trained_models/pvnet_3000.pth", map_location=torch.device('cpu')))
 
 print(game)
 
@@ -24,7 +24,7 @@ while True:
 
         root = Node(parent=None, prior_prob=1.0)
 
-        for _ in range(np.random.randint(300, 1000)):  # introduce some stochasticity here
+        for _ in range(np.random.randint(50, 1000)):  # introduce some stochasticity here
             mcts_one_iter(game, root, policy_value_fn=policy_value_net.policy_value_fn)
 
         move = root.get_move(temp=0)
@@ -36,6 +36,9 @@ while True:
 
     done, winner = game.evolve(move)
     print(game)
+    if game.get_previous_player() == -1:
+        _, val = policy_value_net.policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(), True)
+        print(-val)
 
     if done:
         print(game)
