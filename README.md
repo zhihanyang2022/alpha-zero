@@ -2,9 +2,9 @@
 
 **Author:** Zhihan Yang @ Carleton College
 
-**作者：** 杨之涵 @ 卡尔顿学院
-
 **Keywords:** board game, MCTS, deep convolutional neural network, self-play, PyTorch
+
+**作者：** 杨之涵 @ 卡尔顿学院
 
 **关键词：** 棋类游戏，蒙特卡洛树搜，卷积神经网络，自我对弈, PyTorch
 
