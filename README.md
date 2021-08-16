@@ -8,6 +8,7 @@
 
 **关键词：** 棋类游戏，蒙特卡洛树搜，卷积神经网络，自我对弈, PyTorch
 
+## Intro 简介
 
 A _tabula rasa_ chess agent that follows from the Alpha Go Zero paper but is a slightly simpler. 
 
