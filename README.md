@@ -1,6 +1,8 @@
-# AlphaZeroConnect 从零学习下四子棋
+# AlphaZeroConnect4 从零学习下四子棋
 
 **Author:** Zhihan Yang @ Carleton College
+
+**作者：** 杨之涵 @ 卡尔顿学院
 
 **Keywords:** deep reinforcement learning, alpha go zero, policy iteration, rollout algorithms, self-play, PyTorch
 
