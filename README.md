@@ -4,7 +4,10 @@
 
 **作者：** 杨之涵 @ 卡尔顿学院
 
-**Keywords:** deep reinforcement learning, alpha go zero, policy iteration, rollout algorithms, self-play, PyTorch
+**Keywords:** board game, MCTS, deep convolutional neural network, self-play, PyTorch
+
+**关键词：** 棋类游戏，蒙特卡洛树搜，卷积神经网络，自我对弈, PyTorch
+
 
 A _tabula rasa_ chess agent that follows from the Alpha Go Zero paper but is a slightly simpler. 
 
