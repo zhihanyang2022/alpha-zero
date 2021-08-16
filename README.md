@@ -11,8 +11,8 @@
 ## Example game plays 人机对弈结果
 
 
-## Tutorial 教程
+## Theory tutorial 理论教程
 
 
-## How to run code 如何跑通代码
+## Code tutorial 代码教程
 
