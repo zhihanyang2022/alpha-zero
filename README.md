@@ -8,6 +8,12 @@
 
 **关键词：** 棋类游戏，蒙特卡洛树搜，卷积神经网络，自我对弈，PyTorch
 
+## Connect4 tutorial 四子棋教程
+
+Connect4 is a middle ground between Connect3 (tic-tac-toe) and Connect5 (Gomoku or Gobang). It is much more difficult than Connect3, but it is also much easier than Connect5. Also, in Connect4, if the first-hand player plays optimally, it will win for sure. Here, we use a 6x6 board for Connect4.
+
+四子棋是三子棋（tic-tac-toe）和五子棋的过渡。之所以选择四子棋，是因为四子棋比三子棋难很多，但又比五子棋简单很多。此外，在四子棋中，一个完美的先手可以百分百获胜，方便我们验证AlphaZero学习的结果。
+
 ## Example game plays 人机对弈结果
 
 
@@ -15,4 +21,6 @@
 
 
 ## Code tutorial 代码教程
+
+扩展到其他游戏。
 
