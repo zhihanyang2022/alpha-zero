@@ -4,9 +4,13 @@
 
 **Keywords:** board game, MCTS, deep convolutional neural network, self-play, PyTorch
 
+Feel free to ask questions through Github Issues.
+
 **作者：** 杨之涵 @ 卡尔顿学院
 
 **关键词：** 棋类游戏，蒙特卡洛树搜，卷积神经网络，自我对弈，PyTorch
+
+欢迎通过Github Issues提问。
 
 ## Why Connect4 为什么选择四子棋
 
@@ -27,4 +31,6 @@ Before we talk about theory and code, let's see what AlphaZero can do after 3000
 ## Code tutorial 代码教程
 
 扩展到其他游戏。
+
+## References 对我很有帮助的资源
 
