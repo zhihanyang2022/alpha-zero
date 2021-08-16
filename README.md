@@ -1,6 +1,6 @@
 # AlphaZeroConnect4 从零学习下四子棋 🤖️
 
-**Author:** Zhihan Yang @ Carleton College
+**Author:** Zhihan Yang @ Carleton College (MN, USA)
 
 **Keywords:** board game, MCTS, deep convolutional neural network, self-play, PyTorch
 
