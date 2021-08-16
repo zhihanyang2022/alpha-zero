@@ -8,7 +8,7 @@
 
 **关键词：** 棋类游戏，蒙特卡洛树搜，卷积神经网络，自我对弈，PyTorch
 
-## Connect4 tutorial 四子棋教程
+## Why Connect4 为什么选择四子棋
 
 Connect4 is a middle ground between Connect3 (tic-tac-toe) and Connect5 (Gomoku or Gobang). It is much more difficult than Connect3, but it is also much easier than Connect5. Also, in Connect4, if the first-hand player plays optimally, it will win for sure; this makes it easier to verify how well AlphaZero learned. Here, we use a 6x6 board for Connect4.
 
