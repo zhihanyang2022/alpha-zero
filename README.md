@@ -1,24 +1,41 @@
-# Alpha Zero 从零学习下棋
+# AlphaZero for Connect4 从零开始学习下四子棋 🤔
 
-**Author:** Zhihan Yang @ Carleton College
+**Author:** Zhihan Yang @ Carleton College (MN, USA)
 
-**Keywords:** deep reinforcement learning, alpha go zero, policy iteration, rollout algorithms, self-play, PyTorch
+**Keywords:** board game, MCTS, deep convolutional neural network, self-play, PyTorch
 
-A _tabula rasa_ chess agent that follows from the Alpha Go Zero paper but is a slightly simpler. 
+This is a learning resource, and likely will not be tractable for games using bigger boards. 
 
-By "simpler", I mean that the only difference is that this agent does not use MCTS and instead uses Monte Carlo rollouts which are (1) easier to implement and (2) cleaner conceptually.
+Feel free to ask questions through Github Issues.
 
-I do plan to implement MCTS in a future version, but for now Monte Carlo rollouts would suffice.
+**作者：** 杨之涵 @ 卡尔顿学院
 
-In this repo, we test the agent on two chess environments: tic-tac-toe and gobang.
+**关键词：** 棋类游戏，蒙特卡洛树搜，卷积神经网络，自我对弈，PyTorch
 
-## Motivation
+这个代码库可以帮助大家了解AlphaZero，但是对于棋盘更大的游戏估计完全跑不动。
+
+欢迎通过Github Issues提问。
+
+## Why Connect4 为什么选择四子棋
+
+Connect4 is a middle ground between Connect3 (tic-tac-toe) and Connect5 (Gomoku or Gobang). It is much more difficult than Connect3, but it is also much easier than Connect5. Also, in Connect4, if the first-hand player plays optimally, it will win for sure; this makes it easier to verify how well AlphaZero learned. Here, we use a 6x6 board for Connect4.
+
+四子棋是三子棋（tic-tac-toe）和五子棋的过渡。之所以选择四子棋，是因为四子棋比三子棋难很多，但又比五子棋简单很多。此外，在四子棋中，一个完美玩家在先手的情况下可以百分百获胜，方便我们验证AlphaZero学习的结果。在这里，我们使用6x6的棋盘。
+
+## Example game plays 人机对弈结果
+
+Before we talk about theory and code, let's see what AlphaZero can do after 3000 self-play games:
 
 
-## Algorithm
+
+## Theory tutorial 理论教程
 
 
-## Results
+## Code tutorial 代码教程
 
+扩展到其他游戏。
 
-## Download the chess agent
+## Potential improvements
+
+## References 对我很有帮助的资源
+
