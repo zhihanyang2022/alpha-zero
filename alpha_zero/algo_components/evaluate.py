@@ -11,7 +11,6 @@ def play_one_game_against_pure_mcts(
         num_mcts_iters_alphazero,
         policy_value_fn,
         first_hand,
-        has_audience=False
 ):
 
     game = game_klass()  # at the start, current player is always 1
@@ -27,9 +26,6 @@ def play_one_game_against_pure_mcts(
 
     while True:
 
-        if has_audience:
-            print(game)
-
         if game.get_current_player() == pure_mcts:
 
             root = Node(parent=None, prior_prob=1.0)
@@ -41,23 +37,16 @@ def play_one_game_against_pure_mcts(
 
         else:
 
-            if has_audience:
-                pi_vec, _ = policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(), True)
-                pi_vec[pi_vec < 0.01] = 0
-                print(pi_vec.reshape(game.board.shape))
-
             root = Node(parent=None, prior_prob=1.0)
 
             # introduce randomness by randomly adjusting num mcts iter
-            for _ in range(np.random.randint(num_mcts_iters_alphazero // 2, num_mcts_iters_alphazero * 2)):
+            for _ in range(num_mcts_iters_alphazero):
                 mcts_one_iter(game, root, policy_value_fn=policy_value_fn)
 
             move = root.get_move(temp=0)
 
         done, winner = game.evolve(move)
         if done:
-            if has_audience:
-                print(game)
             break
 
     # return the outcome of the game from perspective of alphazero
