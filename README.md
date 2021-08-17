@@ -38,6 +38,8 @@ The final winning move AlphaZero is shadowed.
 
 在以下对弈中，AlphaZero是先手玩家并持有黑棋。棋盘上显示的数字是卷积神经网络预测出的prior move probabilities。人类玩家（我）是后手并持有白棋。
 
+AlphaZero最后的放棋位置用深色标出。
+
 Game 1:
 
 ![Image](readme_images/game1.png?raw=true)
