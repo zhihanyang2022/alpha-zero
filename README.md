@@ -89,4 +89,4 @@ AlphaZero同时包含MCTS和深度学习的元素。Python并不是最适合实�
 - AlphaGo paper, AlphaGo Zero paper, AlphaZero paper
 - A Survey of Monte Carlo Tree Search Methods by Browne et. al
 - https://github.com/junxiaosong/AlphaZero_Gomoku
-  - My policy-value net was almost a direct copy of the policy-value net in this repo. This repo also gave me a lot of help in implementating MCTS. However, my repo has a totally different structure than this repo, and many implementation details are very different.
+  - My policy-value net was almost a direct copy of the policy-value net in this repo. This repo also gave me a lot of help in implementating MCTS. However, my repo has a totally different structure as compared to this repo, and many implementation details are very different.
