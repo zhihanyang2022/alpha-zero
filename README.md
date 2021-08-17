@@ -58,11 +58,17 @@ A detailed tutorial is available in this repo; see `alphazero.pdf`.
 
 Please first make sure that your working directory is `alpha_zero` by `cd alpha_zero`.
 
-How to play against pure MCTS (early moves can take up to 25 seconds but later moves are quicker): `python connect4_mcts_vs_human.py`
+How to play against pure MCTS (early moves can take up to 25 seconds but later moves are quicker): 
 
-How to play against pre-trained AlphaZero (moves are fast): `python connect4_alphazero_vs_human.py`
+`python connect4_mcts_vs_human.py`
 
-How to train AlphaZero from scratch (3000 self-play games & supervised learning takes around 7-8 hours on GPU): `python connect4_train_alphazero.py`
+How to play against pre-trained AlphaZero (moves are fast): 
+
+`python connect4_alphazero_vs_human.py`
+
+How to train AlphaZero from scratch (3000 self-play games & supervised learning takes around 7-8 hours on GPU): 
+
+`python connect4_train_alphazero.py`
 
 wandb
 
