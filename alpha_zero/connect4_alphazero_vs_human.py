@@ -20,6 +20,7 @@ while True:
 
         pi_vec, _ = policy_value_net.policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(), True)
         pi_vec[pi_vec < 0.01] = 0
+        print("@@@@@ Prior move probabilities @@@@@")
         print(pi_vec.reshape(game.board.shape))
 
         root = Node(parent=None, prior_prob=1.0)
@@ -35,10 +36,9 @@ while True:
         move = (move[0] - 1, move[1] - 1)
 
     done, winner = game.evolve(move)
-    print(game)
     if game.get_previous_player() == -1:
-        _, val = policy_value_net.policy_value_fn(game.board * game.get_current_player(), game.get_valid_moves(), True)
-        print(-val)
+        print("@@@@@ AlphaZero just moved @@@@@")
+    print(game)
 
     if done:
         print(game)

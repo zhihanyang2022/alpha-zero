@@ -22,3 +22,7 @@ class Game(ABC):
     @abstractmethod
     def get_valid_moves(self) -> list:
         pass
+
+    @abstractmethod
+    def __repr__(self) -> str:
+        pass
