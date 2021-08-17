@@ -24,7 +24,7 @@ Connect4 is a middle ground between Connect3 (tic-tac-toe) and Connect5 (Gomoku 
 
 ## Example game plays 人机对弈结果
 
-Before we talk about theory and code, let's see what AlphaZero can do after 3000 self-play games:
+Before we talk about theory and code, let's see what AlphaZero can do after 3000 self-play games. In all games below, AlphaZero is the first-hand player and holds the black stone. 
 
 Game 1:
 
