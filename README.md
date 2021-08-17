@@ -24,7 +24,9 @@ Connect4 is a middle ground between Connect3 (tic-tac-toe) and Connect5 (Gomoku 
 
 ## Example game plays 人机对弈结果
 
-Before we talk about theory and code, let's see what AlphaZero can do after 3000 self-play games. In all games below, AlphaZero is the first-hand player and holds the black stone. 
+Before we talk about theory and code, let's see what AlphaZero can do after 3000 self-play games. During training, AlphaZero uses 500 MCTS simulations for each move. During evaluation (the games below), AlphaZero uses 50-1000 MCTS iterations (randomly picked between this range) to induce some stochasticity. 
+
+In all games below, AlphaZero is the first-hand player and holds the black stone, and the values in the background show the prior move probabilities predicted by the convolutional neural network. 
 
 Game 1:
 
