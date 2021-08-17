@@ -28,6 +28,8 @@ Before we talk about theory and code, let's see what AlphaZero can do after 3000
 
 In all games below, AlphaZero is the first-hand player and holds the black stone, and the values in the background show the prior move probabilities predicted by the convolutional neural network. The human player (me) is the second-hand player and holds the white stone.
 
+The winning move is shadowed.
+
 Game 1:
 
 ![Image](readme_images/game1.png?raw=true)
