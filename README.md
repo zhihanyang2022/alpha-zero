@@ -22,20 +22,41 @@ Connect4 is a middle ground between Connect3 (tic-tac-toe) and Connect5 (Gomoku 
 
 四子棋是三子棋（tic-tac-toe）和五子棋的过渡。之所以选择四子棋，是因为四子棋比三子棋难很多，但又比五子棋简单很多。此外，在四子棋中，一个完美玩家在先手的情况下可以百分百获胜，方便我们验证AlphaZero学习的结果。在这里，我们使用6x6的棋盘。
 
-## Example game plays 人机对弈结果
+## Example game plays vs human 人机对弈结果
 
-Before we talk about theory and code, let's see what AlphaZero can do after 3000 self-play games:
+Before we talk about theory and code, let's see what AlphaZero can do after 3000 self-play games. 
 
+During training, AlphaZero uses 500 MCTS simulations for each move; during evaluation (for the games below), AlphaZero uses 50-1000 MCTS iterations (randomly picked between this range) to induce some stochasticity. 
 
+In all games below, AlphaZero is the first-hand player and holds the black stone, and the values in the background show the prior move probabilities predicted by the convolutional neural network. The human player (me) is the second-hand player and holds the white stone. The final winning move AlphaZero is shadowed.
+
+在讨论理论和代码之前，我们来看看AlphaZero在3000局self-play之后能达到什么样的效果。
+
+在训练当中，AlphaZero每一步使用500次MCTS simuation；在测试中（以下对弈），AlphaZero每一步使用50到1000次（`np.random.randint`）MCTS simuation来产生一定的随机性。
+
+在以下对弈中，AlphaZero是先手玩家并持有黑棋。棋盘上显示的数字是卷积神经网络预测出的prior move probabilities。人类玩家（我）是后手并持有白棋。AlphaZero最后的放棋位置用深色标出。
+
+Game 1:
+
+![Image](readme_images/game1.png?raw=true)
+
+Game 2:
+
+![Image](readme_images/game2.png?raw=true)
+
+Game 3:
+
+![Image](readme_images/game3.png?raw=true)
 
 ## Theory tutorial 理论教程
 
+A detailed tutorial is available in this repo; see `alphazero.pdf`.
+
+这个代码库包含一份详细的理论教程，请见`alphazero.pdf`.
 
 ## Code tutorial 代码教程
 
-扩展到其他游戏。
-
-## Potential improvements
+## Potential improvements 可以提升的地方
 
 ## References 对我很有帮助的资源
 
