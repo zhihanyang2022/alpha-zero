@@ -60,7 +60,7 @@ A detailed tutorial is available in this repo; see `alphazero.pdf`.
 
 ## Code tutorial 代码教程
 
-## Potential improvements
+## Potential improvements 可以提升的地方
 
 ## References 对我很有帮助的资源
 
