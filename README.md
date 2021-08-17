@@ -56,6 +56,14 @@ A detailed tutorial is available in this repo; see `alphazero.pdf`.
 
 ## Code tutorial 代码教程
 
+how to play against pure mcts
+
+how to play against pre-trained alpha zero
+
+how to train alpha zero from scratch
+
+wandb
+
 ## Potential improvements 可以提升的地方
 
 ## References 对我很有帮助的资源
