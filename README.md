@@ -26,9 +26,17 @@ Connect4 is a middle ground between Connect3 (tic-tac-toe) and Connect5 (Gomoku 
 
 Before we talk about theory and code, let's see what AlphaZero can do after 3000 self-play games:
 
+Game 1:
+
 ![Image](readme_images/game1.png?raw=true)
 
-<img src="https://github.com/zhihanyang2022/off-policy-continuous-control/raw/simple/file/reproduce_sb3/offpcc_sac_walker2d.png" width=300>
+Game 2:
+
+![Image](readme_images/game2.png?raw=true)
+
+Game 3:
+
+![Image](readme_images/game3.png?raw=true)
 
 ## Theory tutorial 理论教程
 
