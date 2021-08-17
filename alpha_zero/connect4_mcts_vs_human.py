@@ -1,9 +1,8 @@
 from ast import literal_eval
 import time
 
-from games.connect4 import Connect4
-from algo_components.node import Node
-from algo_components.mcts import mcts_one_iter
+from games import Connect4
+from algo_components import Node, mcts_one_iter
 
 
 game = Connect4()

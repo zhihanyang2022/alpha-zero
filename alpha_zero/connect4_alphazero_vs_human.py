@@ -2,9 +2,8 @@ from ast import literal_eval
 import torch
 import numpy as np
 
-from games.connect4 import Connect4
-from algo_components.policy_value_net import PolicyValueNet
-from algo_components import Node, mcts_one_iter
+from games import Connect4
+from algo_components import Node, mcts_one_iter, PolicyValueNet
 
 
 game = Connect4()

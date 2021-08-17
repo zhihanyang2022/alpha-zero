@@ -1,6 +1,3 @@
-from numpy import unravel_index
-import numpy as np
-
 from algo_components.node import Node
 from algo_components.mcts import mcts_one_iter
 
