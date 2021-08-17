@@ -22,11 +22,11 @@ Connect4 is a middle ground between Connect3 (tic-tac-toe) and Connect5 (Gomoku 
 
 四子棋是三子棋（tic-tac-toe）和五子棋的过渡。之所以选择四子棋，是因为四子棋比三子棋难很多，但又比五子棋简单很多。此外，在四子棋中，一个完美玩家在先手的情况下可以百分百获胜，方便我们验证AlphaZero学习的结果。在这里，我们使用6x6的棋盘。
 
-## Example game plays 人机对弈结果
+## Example game plays vs human 人机对弈结果
 
 Before we talk about theory and code, let's see what AlphaZero can do after 3000 self-play games. During training, AlphaZero uses 500 MCTS simulations for each move. During evaluation (the games below), AlphaZero uses 50-1000 MCTS iterations (randomly picked between this range) to induce some stochasticity. 
 
-In all games below, AlphaZero is the first-hand player and holds the black stone, and the values in the background show the prior move probabilities predicted by the convolutional neural network. 
+In all games below, AlphaZero is the first-hand player and holds the black stone, and the values in the background show the prior move probabilities predicted by the convolutional neural network. The human player (me) is the second-hand player and holds the white stone.
 
 Game 1:
 
