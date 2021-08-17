@@ -76,5 +76,9 @@ After training has finished, you can put `pvnet_3000.pth` in `trained_models` (i
 
 ## Potential improvements 可以提升的地方
 
+AlphaZero involves both MCTS and deep learning. Python isn't the best language for implementing MCTS because it is slow. However, Python is one of the best languages for doing deep learning. These two factors together form a dilemma because I want to use C++ for MCTS but I don't know how to do supervised learning using C++.
+
+AlphaZero同时包含MCTS和深度学习的元素。Python并不是最适合实现MCTS的语言，因为它太慢了。但Python确实是做deep learning最好的语言之一。这两个因素加在一起让我有些为难，因为我希望用C++来写MCTS，但我并不知道如何在C++中做深度学习。
+
 ## References 对我很有帮助的资源
 
