@@ -86,4 +86,6 @@ AlphaZero同时包含MCTS和深度学习的元素。Python并不是最适合实�
 
 ## References 对我很有帮助的资源
 
-
+- AlphaGo paper, AlphaGo Zero paper, AlphaZero paper
+- A Survey of Monte Carlo Tree Search Methods by Browne et. al
+- https://github.com/junxiaosong/AlphaZero_Gomoku
