@@ -1,4 +1,4 @@
-# AlphaZero for Connect4 从零开始学习下四子棋 🤔
+# AlphaZero for Connect4
 
 **Author:** Zhihan Yang @ Carleton College (MN, USA)
 
@@ -7,14 +7,6 @@
 This is a learning resource, and likely will not be tractable for games using bigger boards. 
 
 Feel free to ask questions through Github Issues.
-
-**作者：** 杨之涵 @ 卡尔顿学院
-
-**关键词：** 棋类游戏，蒙特卡洛树搜，卷积神经网络，自我对弈，PyTorch
-
-这个代码库可以帮助大家了解AlphaZero，但是对于棋盘更大的游戏估计完全跑不动。
-
-欢迎通过Github Issues提问。
 
 ## Why Connect4 为什么选择四子棋
 
