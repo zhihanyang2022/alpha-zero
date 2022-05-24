@@ -1,7 +1,5 @@
 # AlphaZero for Connect4
 
-**Author:** Zhihan Yang @ Carleton College (MN, USA)
-
 **Keywords:** board game, MCTS, deep convolutional neural network, self-play, PyTorch
 
 This is a learning resource, and likely will not be tractable for games using bigger boards. 
