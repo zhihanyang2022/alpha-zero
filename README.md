@@ -1,4 +1,5 @@
-🚀 A detailed tutorial on the theory and implementation of AlphaZero is available in this repo; see `alphazero.pdf`.
+🚀 A detailed tutorial on the theory and implementation of AlphaZero is available in this repo; see `alphazero.pdf`!
+🚀 A pre-trained model is included so you can simply clone this repo and try it out!
 
 # AlphaZero for Connect4
 
