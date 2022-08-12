@@ -1,4 +1,4 @@
-✨ A detailed tutorial on the theory and implementation of AlphaZero is available in this repo; see `alphazero.pdf`.
+🚀 A detailed tutorial on the theory and implementation of AlphaZero is available in this repo; see `alphazero.pdf`.
 
 # AlphaZero for Connect4
 
